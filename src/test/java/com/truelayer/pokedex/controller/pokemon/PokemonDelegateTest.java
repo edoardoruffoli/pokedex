@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,8 +34,8 @@ class PokemonDelegateTest extends BaseUnitTest {
     void getPokemonByName_shouldGet() {
         // given
         String name = "name";
-        PokemonBean pokemonBean = mock(PokemonBean.class);
-        PokemonResponseBean pokemonResponseBean = mock(PokemonResponseBean.class);
+        PokemonBean pokemonBean = random(PokemonBean.class);
+        PokemonResponseBean pokemonResponseBean = random(PokemonResponseBean.class);
 
         when(pokemonService.getPokemonByName(any())).thenReturn(pokemonBean);
         when(pokemonConverter.toResponseBean(any())).thenReturn(pokemonResponseBean);
