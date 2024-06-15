@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class PokemonService {
-    private static final String HABITAT_CAVE = "cave";
+    protected static final String HABITAT_CAVE = "cave";
 
     @Autowired
     private PokeApiService pokeApiService;

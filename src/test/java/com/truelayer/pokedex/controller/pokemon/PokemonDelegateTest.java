@@ -2,7 +2,7 @@ package com.truelayer.pokedex.controller.pokemon;
 
 import com.truelayer.pokedex.BaseUnitTest;
 import com.truelayer.pokedex.controller.pokemon.bean.PokemonResponseBean;
-import com.truelayer.pokedex.controller.pokemon.bean.converter.PokemonBeanToResponseConverter;
+import com.truelayer.pokedex.controller.pokemon.converter.PokemonBeanToResponseConverter;
 import com.truelayer.pokedex.service.pokemon.PokemonService;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;
 import org.junit.jupiter.api.AfterEach;
@@ -47,6 +47,26 @@ class PokemonDelegateTest extends BaseUnitTest {
         assertThat(res)
                 .isEqualTo(pokemonResponseBean);
         verify(pokemonService).getPokemonByName(name);
+        verify(beanToResponseConverter).convert(pokemonBean);
+    }
+
+    @Test
+    void getPokemonByNameWithTranslation_shouldGet() {
+        // given
+        String name = "name";
+        PokemonBean pokemonBean = random(PokemonBean.class);
+        PokemonResponseBean pokemonResponseBean = random(PokemonResponseBean.class);
+
+        when(pokemonService.getPokemonByNameWithTranslation(any())).thenReturn(pokemonBean);
+        when(beanToResponseConverter.convert(any())).thenReturn(pokemonResponseBean);
+
+        // when
+        PokemonResponseBean res = delegate.getPokemonByNameWithTranslation(name);
+
+        // verify
+        assertThat(res)
+                .isEqualTo(pokemonResponseBean);
+        verify(pokemonService).getPokemonByNameWithTranslation(name);
         verify(beanToResponseConverter).convert(pokemonBean);
     }
 

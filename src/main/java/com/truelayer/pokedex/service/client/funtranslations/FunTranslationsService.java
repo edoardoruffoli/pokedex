@@ -9,12 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 
 @Component
 public class FunTranslationsService {
     private static final Logger logger = LoggerFactory.getLogger(FunTranslationsService.class);
 
-    @Autowired private FunTranslationsClient funtranslationsClient;
+    @Autowired private FunTranslationsClient funTranslationsClient;
 
     public String getTranslation(String text, CharacterEnum character) {
         logger.info("Call FunTranslations to translate \"{}\" using {} translation", text, character.toString());
@@ -22,8 +24,10 @@ public class FunTranslationsService {
                 .text(text)
                 .build();
         try {
-            TranslationResponseBean translationResponseBean = funtranslationsClient.getTranslation(character.toString(), translationRequestBean);
-            return translationResponseBean.contentBean().translated();
+            TranslationResponseBean translationResponseBean = funTranslationsClient.getTranslation(character.toString(), translationRequestBean);
+            return Optional.ofNullable(translationResponseBean.contentBean())
+                    .map(TranslationResponseBean.TranslationContentBean::translated)
+                    .orElse(null);
         }
         catch (FunTranslationsException e) {
             return null;

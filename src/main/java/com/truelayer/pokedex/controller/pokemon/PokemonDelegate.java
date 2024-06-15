@@ -1,7 +1,7 @@
 package com.truelayer.pokedex.controller.pokemon;
 
 import com.truelayer.pokedex.controller.pokemon.bean.PokemonResponseBean;
-import com.truelayer.pokedex.controller.pokemon.bean.converter.PokemonBeanToResponseConverter;
+import com.truelayer.pokedex.controller.pokemon.converter.PokemonBeanToResponseConverter;
 import com.truelayer.pokedex.service.pokemon.PokemonService;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;
 import org.slf4j.Logger;

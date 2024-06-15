@@ -1,4 +1,4 @@
-package com.truelayer.pokedex.controller.pokemon.bean.converter;
+package com.truelayer.pokedex.controller.pokemon.converter;
 
 import com.truelayer.pokedex.controller.pokemon.bean.PokemonResponseBean;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;

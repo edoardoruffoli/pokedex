@@ -1,7 +1,7 @@
 package com.truelayer.pokedex.service.client.pokeapi;
 
 import com.truelayer.pokedex.service.client.pokeapi.bean.PokemonSpeciesResponseBean;
-import com.truelayer.pokedex.service.client.pokeapi.bean.converter.PokemonSpeciesResponseBeanToBeanConverter;
+import com.truelayer.pokedex.service.client.pokeapi.converter.PokemonSpeciesResponseBeanToBeanConverter;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.truelayer.pokedex.service.client.pokeapi.bean.converter;
+package com.truelayer.pokedex.service.client.pokeapi.converter;
 
 import com.truelayer.pokedex.service.client.pokeapi.bean.PokemonSpeciesResponseBean;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;
@@ -11,6 +11,7 @@ import java.util.Optional;
 @Component
 public class PokemonSpeciesResponseBeanToBeanConverter implements Converter<PokemonSpeciesResponseBean, PokemonBean> {
 
+    @Override
     public PokemonBean convert(PokemonSpeciesResponseBean pokemonSpeciesResponseBean) {
         return PokemonBean.builder()
                 .name(pokemonSpeciesResponseBean.name())
