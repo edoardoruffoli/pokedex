@@ -71,6 +71,7 @@ public class PokemonControllerIntegrationTest extends BaseIntegrationTest {
         ResponseEntity<String> response = testRestTemplate.getForEntity("http://localhost:%d/pokemon/%s".formatted(port, pokemonName), String.class);
 
         assertThat(response.getStatusCode().value()).isEqualTo(404);
+        assertThat(response.getBody()).isEqualTo("Pokemon not found on PokeApi");
     }
 
     @Test
@@ -81,5 +82,6 @@ public class PokemonControllerIntegrationTest extends BaseIntegrationTest {
         ResponseEntity<String> response = testRestTemplate.getForEntity("http://localhost:%d/pokemon/%s".formatted(port, pokemonName), String.class);
 
         assertThat(response.getStatusCode().value()).isEqualTo(500);
+        assertThat(response.getBody()).isEqualTo("Internal server error");
     }
 }

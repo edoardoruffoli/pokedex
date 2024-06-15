@@ -15,12 +15,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = { PokeApiNotFoundException.class})
     protected final ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request) {
-        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        String bodyOfResponse = "Pokemon not found on PokeApi";
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler(value = { PokeApiException.class, RuntimeException.class})
+    @ExceptionHandler(value = { RuntimeException.class})
     protected final ResponseEntity<Object> handleInternalServerError(RuntimeException ex, WebRequest request) {
-        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        String bodyOfResponse = "Internal server error";
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
 }
