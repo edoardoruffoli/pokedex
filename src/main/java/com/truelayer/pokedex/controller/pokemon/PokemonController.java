@@ -21,4 +21,9 @@ public class PokemonController {
         return pokemonDelegate.getPokemonByName(name);
     }
 
+    @GetMapping("/translated/{name}")
+    public PokemonResponseBean getPokemonByNameWithTranslation(@PathVariable String name) {
+        return pokemonDelegate.getPokemonByNameWithTranslation(name);
+    }
+
 }

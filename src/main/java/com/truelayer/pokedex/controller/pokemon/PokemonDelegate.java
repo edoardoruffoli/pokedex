@@ -25,4 +25,9 @@ public class PokemonDelegate {
         return pokemonConverter.toResponseBean(pokemonBean);
     }
 
+    public PokemonResponseBean getPokemonByNameWithTranslation(String name) {
+        PokemonBean pokemonBean = pokemonService.getPokemonByNameWithTranslation(name);
+        return pokemonConverter.toResponseBean(pokemonBean);
+    }
+
 }
