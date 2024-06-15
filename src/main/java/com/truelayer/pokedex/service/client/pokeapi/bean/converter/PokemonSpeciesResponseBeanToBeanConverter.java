@@ -1,26 +1,17 @@
-package com.truelayer.pokedex.converter;
+package com.truelayer.pokedex.service.client.pokeapi.bean.converter;
 
-import com.truelayer.pokedex.controller.pokemon.bean.PokemonResponseBean;
 import com.truelayer.pokedex.service.client.pokeapi.bean.PokemonSpeciesResponseBean;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 
 @Component
-public class PokemonConverter {
+public class PokemonSpeciesResponseBeanToBeanConverter implements Converter<PokemonSpeciesResponseBean, PokemonBean> {
 
-    public PokemonResponseBean toResponseBean(PokemonBean pokemonBean) {
-        return PokemonResponseBean.builder()
-                .name(pokemonBean.name())
-                .description(pokemonBean.description())
-                .habitat(pokemonBean.habitat())
-                .isLegendary(pokemonBean.isLegendary())
-                .build();
-    }
-
-    public PokemonBean toBean(PokemonSpeciesResponseBean pokemonSpeciesResponseBean) {
+    public PokemonBean convert(PokemonSpeciesResponseBean pokemonSpeciesResponseBean) {
         return PokemonBean.builder()
                 .name(pokemonSpeciesResponseBean.name())
                 .description(Optional.ofNullable(pokemonSpeciesResponseBean.flavorTextEntries())
@@ -35,4 +26,5 @@ public class PokemonConverter {
                         .orElse(null))
                 .build();
     }
+
 }

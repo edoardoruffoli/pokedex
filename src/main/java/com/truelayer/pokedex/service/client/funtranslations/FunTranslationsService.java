@@ -1,6 +1,5 @@
 package com.truelayer.pokedex.service.client.funtranslations;
 
-import com.truelayer.pokedex.converter.PokemonConverter;
 import com.truelayer.pokedex.service.client.funtranslations.bean.TranslationRequestBean;
 import com.truelayer.pokedex.service.client.funtranslations.bean.TranslationResponseBean;
 import com.truelayer.pokedex.service.client.funtranslations.enums.CharacterEnum;

@@ -2,7 +2,7 @@ package com.truelayer.pokedex.controller.pokemon;
 
 import com.truelayer.pokedex.BaseUnitTest;
 import com.truelayer.pokedex.controller.pokemon.bean.PokemonResponseBean;
-import com.truelayer.pokedex.converter.PokemonConverter;
+import com.truelayer.pokedex.controller.pokemon.bean.converter.PokemonBeanToResponseConverter;
 import com.truelayer.pokedex.service.pokemon.PokemonService;
 import com.truelayer.pokedex.service.pokemon.bean.PokemonBean;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 class PokemonDelegateTest extends BaseUnitTest {
 
     @Mock private PokemonService pokemonService;
-    @Mock private PokemonConverter pokemonConverter;
+    @Mock private PokemonBeanToResponseConverter beanToResponseConverter;
     @InjectMocks
     private PokemonDelegate delegate;
 
@@ -27,7 +27,7 @@ class PokemonDelegateTest extends BaseUnitTest {
     void tearDown() {
         verifyNoMoreInteractions(
                 pokemonService,
-                pokemonConverter);
+                beanToResponseConverter);
     }
 
     @Test
@@ -38,7 +38,7 @@ class PokemonDelegateTest extends BaseUnitTest {
         PokemonResponseBean pokemonResponseBean = random(PokemonResponseBean.class);
 
         when(pokemonService.getPokemonByName(any())).thenReturn(pokemonBean);
-        when(pokemonConverter.toResponseBean(any())).thenReturn(pokemonResponseBean);
+        when(beanToResponseConverter.convert(any())).thenReturn(pokemonResponseBean);
 
         // when
         PokemonResponseBean res = delegate.getPokemonByName(name);
@@ -47,7 +47,7 @@ class PokemonDelegateTest extends BaseUnitTest {
         assertThat(res)
                 .isEqualTo(pokemonResponseBean);
         verify(pokemonService).getPokemonByName(name);
-        verify(pokemonConverter).toResponseBean(pokemonBean);
+        verify(beanToResponseConverter).convert(pokemonBean);
     }
 
 }
