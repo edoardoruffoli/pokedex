@@ -54,7 +54,7 @@ Fetches translated Pokemon description based on specific rules:
 
 1. Clone the repository:
    ```shell
-   git clone <repository-url>
+   git clone https://github.com/edoardoruffoli/pokedex
    cd pokedex
    ```
 2. Build the Docker image:

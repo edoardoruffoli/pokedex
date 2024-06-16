@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-@AutoConfigureWireMock(port = 80)
+@AutoConfigureWireMock(port = 0)
 public class PokemonControllerIntegrationTest extends BaseIntegrationTest {
 
     @LocalServerPort
