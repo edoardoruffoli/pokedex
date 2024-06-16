@@ -1,6 +1,5 @@
 package com.truelayer.pokedex.domain.exception;
 
-import com.truelayer.pokedex.service.client.pokeapi.exception.PokeApiException;
 import com.truelayer.pokedex.service.client.pokeapi.exception.PokeApiNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

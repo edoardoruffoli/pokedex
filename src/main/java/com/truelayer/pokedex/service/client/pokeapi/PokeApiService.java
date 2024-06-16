@@ -17,7 +17,7 @@ public class PokeApiService {
     @Autowired private PokemonSpeciesResponseBeanToBeanConverter responseBeanToBeanConverter;
 
     public PokemonBean getPokemonData(String name) {
-        logger.info("Getting {} data from PokeApi", name);
+        logger.info("Calling PokeAPI to retrieve data for Pokémon: {}", name);
         PokemonSpeciesResponseBean pokemonSpeciesResponseBean = pokeApiClient.getPokemon(name);
         return responseBeanToBeanConverter.convert(pokemonSpeciesResponseBean);
     }

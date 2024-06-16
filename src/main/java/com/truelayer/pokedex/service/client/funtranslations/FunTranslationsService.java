@@ -4,6 +4,7 @@ import com.truelayer.pokedex.service.client.funtranslations.bean.TranslationRequ
 import com.truelayer.pokedex.service.client.funtranslations.bean.TranslationResponseBean;
 import com.truelayer.pokedex.service.client.funtranslations.enums.CharacterEnum;
 import com.truelayer.pokedex.service.client.funtranslations.exception.FunTranslationsException;
+import com.truelayer.pokedex.service.client.funtranslations.exception.FunTranslationsTooManyRequestsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class FunTranslationsService {
     @Autowired private FunTranslationsClient funTranslationsClient;
 
     public String getTranslation(String text, CharacterEnum character) {
-        logger.info("Call FunTranslations to translate \"{}\" using {} translation", text, character.toString());
+        logger.info("Calling FunTranslations API to translate the text \"{}\" using the {} translation method.", text, character.toString());
         TranslationRequestBean translationRequestBean = TranslationRequestBean.builder()
                 .text(text)
                 .build();
@@ -29,7 +30,12 @@ public class FunTranslationsService {
                     .map(TranslationResponseBean.TranslationContentBean::translated)
                     .orElse(null);
         }
+        catch (FunTranslationsTooManyRequestsException e) {
+            logger.warn("Request limit to FunTranslations API exceeded. Please slow down and try again later");
+            return null;
+        }
         catch (FunTranslationsException e) {
+            logger.error("An error occurred while communicating with the FunTranslations API");
             return null;
         }
     }
