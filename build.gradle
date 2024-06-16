@@ -50,7 +50,6 @@ dependencyManagement {
 
 jacoco {
     toolVersion = "0.8.11"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
 tasks.named('test') {
@@ -62,9 +61,8 @@ jacocoTestReport {
     dependsOn test
 
     reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        xml.required = true
+        html.required = true
     }
 
     afterEvaluate {
