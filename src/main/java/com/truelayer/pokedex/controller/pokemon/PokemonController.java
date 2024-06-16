@@ -17,7 +17,7 @@ public class PokemonController {
     private PokemonDelegate pokemonDelegate;
 
     @GetMapping("/{name}")
-    public PokemonResponseBean getPokemonByName(@PathVariable @NonNull final String name) {
+    public PokemonResponseBean getPokemonByName(@PathVariable @NonNull String name) {
         return pokemonDelegate.getPokemonByName(name);
     }
 
