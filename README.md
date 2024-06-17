@@ -47,8 +47,8 @@ Fetches translated Pokemon description based on specific rules:
 
 ### Prerequisites
 
-- Git
-- Docker
+- Git (https://www.git-scm.com/downloads)
+- Docker (https://docs.docker.com/get-docker/)
 
 ### Steps
 
@@ -66,17 +66,36 @@ Fetches translated Pokemon description based on specific rules:
    docker run -d -p 8080:8080 --name pokedex-active pokedex
    ```
 
+### Note
+On Windows, it may be necessary to run the following script before cloning the repository:
+```shell
+git config --global core.autocrlf input
+```
+Related [issue](https://stackoverflow.com/a/71827011).
+
 ## Improvements for Production
 
-- **Add Persistence:** Implement database support to store Pokemon data locally to reduce external API calls.
-- **Add CloudWatch:** Integrate AWS CloudWatch for monitoring API calls and performance metrics.
+### Caching
+Since the number of Pokémon doesn't change frequently, we can persist the full list of Pokémon and their translations inside a
+database or a file. 
+If we prefer not to persist all possible calls, we can use in-memory caching solutions like Redis to store frequently requested data,
+such as translation requests and the most commonly requested Pokémon. This will help efficiently serve the most common API calls.
 
+### Rate Limiting
+FunTranslations imposes a strict limit of 5 requests per hour, which is inadequate for a production environment. 
+To resolve this issue, we should consider upgrading to a paid plan that removes the 5 requests per hour restriction, 
+ensuring sufficient capacity to meet production demands. Implementing a persistence layer to store responses from previous 
+requests will reduce the need for frequent external API calls by retrieving data directly from stored information whenever possible.
 
-Add persistence
-Add cloudwatch to keep track of api calls
+To monitor the frequency of calls to external APIs and implement cache scaling mechanisms, we could introduce a 
+CloudWatch metric tied to the external API calls. 
+In the event of frequent cache misses, scaling out the cache can be achieved through a scaling policy based on this metric.
 
-Add jacoco coverage report
-Persist pokemon to handle rate limiting constraints
-Add cloudwatch to keep track of api calls
+### Logging and Deployment
+Integrate a logging framework like Logback to ensure consistent log formatting. This will facilitate log aggregation 
+and monitoring with tools such as ELK Stack (Elasticsearch, Logstash, Kibana).
+Additionally, while we already have GitHub Actions for computing coverage, we can enhance our deployment process by linking these actions to Kubernetes, 
+implementing CI/CD for more efficient and automated workflows.
 
-Implemented circuit breaker on funTranslations API, maybe we can do it for PokeAPI
+### Formal API Documentation
+Provide comprehensive API documentation using OpenAPI (Swagger) to ensure clarity and ease of use for developers.
